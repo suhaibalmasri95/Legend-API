@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Entities.Interfaces
+{
+    public interface IStatusDate
+    {
+
+
+        DateTime STATUS_DATE { get; set; }
+    }
+}
