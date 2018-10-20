@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ClosedXML">
       <HintPath>..\References\ClosedXML.dll</HintPath>
     </Reference>
