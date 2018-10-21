@@ -173,7 +173,7 @@ namespace Engine.Repository
         public List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             List<LockUp> minorCodes = new List<LockUp>();
-
+            List<LockUp> minorCodesToReturn = new List<LockUp>();
             var dyParam = new OracleDynamicParameters();
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
@@ -188,15 +188,15 @@ namespace Engine.Repository
 
             foreach (var item in minorCodes)
             {
-                if (item.MINOR_CODE == 0)
-                    minorCodes.Remove(item);
+                if (item.MINOR_CODE != 0)
+                    minorCodesToReturn.Add(item);
 
             }
 
 
 
 
-            return minorCodes;
+            return minorCodesToReturn;
         }
 
 
