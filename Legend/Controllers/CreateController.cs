@@ -225,7 +225,7 @@ namespace Legend.Controllers
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Output);
             dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Int64, ParameterDirection.Input, (object)lockup.MAJOR_CODE ?? DBNull.Value);
-            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Int64, ParameterDirection.Input, (object)lockup.MAJOR_CODE ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Int64, ParameterDirection.Input, (object)lockup.MINOR_CODE ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)lockup.NAME ?? DBNull.Value, 500);
             dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)lockup.NAME2 ?? DBNull.Value, 500);
             dyParam.Add(Params.PARAMETER_CREATED_BY, OracleDbType.Varchar2, ParameterDirection.Input, (object)lockup.CREATED_BY ?? DBNull.Value, 500);
