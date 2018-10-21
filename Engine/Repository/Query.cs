@@ -9,8 +9,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
+using Engine.Helpers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Reflection;
+using System.Linq;
 
 namespace Engine.Repository
 {
@@ -45,7 +48,29 @@ namespace Engine.Repository
             return result;
         }
 
+        public  List<LockUp> GetAllLockUp(string SPName, OracleDynamicParameters Params)
+        {
+            List<LockUp> result = new List<LockUp>();
+            try
+            {
+                var connection = new DbConnection().GetConnection();
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
 
+                if (connection.State == ConnectionState.Open)
+                {
+                    result = SqlMapper.Query<LockUp>(connection, SPName, param: Params, commandType: CommandType.StoredProcedure).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return result;
+        }
         public async Task<IList> LoadCountries(Int64? countryId, Int64? langId)
         {
             var dyParam = new OracleDynamicParameters();
@@ -112,13 +137,13 @@ namespace Engine.Repository
 
 
        
-        public async Task<IList> LoadLockUps(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1)
+        public async Task<IList> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MajorCode ?? DBNull.Value);
-            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCore ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCode ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
@@ -128,13 +153,13 @@ namespace Engine.Repository
         }
 
        
-        public async Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1)
+        public async Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MajorCode ?? DBNull.Value);
-            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCore ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCode ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
@@ -145,7 +170,37 @@ namespace Engine.Repository
         }
 
 
- 
+        public async Task<IList> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        {
+            List<LockUp> minorCodes = new List<LockUp>();
+
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MajorCode ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCode ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
+
+
+
+            minorCodes = GetAllLockUp(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
+
+            foreach (var item in minorCodes)
+            {
+                if (item.MINOR_CODE == 0)
+                    minorCodes.Remove(item);
+
+            }
+
+
+
+
+            return minorCodes;
+        }
+
+
+
         public async Task<IList> LoadBanks(long? ID, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
