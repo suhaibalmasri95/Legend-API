@@ -101,11 +101,11 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUpsMinorCode")]
-        public async Task<IList> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID)
+        public List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID)
         {
 
 
-            var result = await _queryRepository.LoadLockUpsMinorCode(ID, MajorCode, MinorCode, languageID);
+            List<LockUp> result =  _queryRepository.LoadLockUpsMinorCode(ID, MajorCode, MinorCode, languageID);
 
             return result;
         }

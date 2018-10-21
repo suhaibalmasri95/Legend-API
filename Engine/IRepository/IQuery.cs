@@ -18,7 +18,7 @@ namespace Engine.IRepository
         Task<IList> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId);
         Task<IList> LoadCurrencies(string CurrencyCode, Int64? langId = 1);
         Task<IList> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
-        Task<IList> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
+        List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
         Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1);
         Task<IList> LoadBanks(long? ID, long? languageID = 1);
 

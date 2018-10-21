@@ -170,7 +170,7 @@ namespace Engine.Repository
         }
 
 
-        public async Task<IList> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             List<LockUp> minorCodes = new List<LockUp>();
 
