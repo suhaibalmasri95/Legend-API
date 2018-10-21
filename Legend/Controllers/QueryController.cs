@@ -90,11 +90,11 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUpStatus")]
-        public async Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1)
+        public async Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID )
         {
 
 
-          var result = await _queryRepository.LoadLockUpStatus(ID, MajorCode, MinorCore, languageID);
+          var result = await _queryRepository.LoadLockUpStatus(ID, MajorCode, MinorCode, languageID);
       
             return result;
         }
