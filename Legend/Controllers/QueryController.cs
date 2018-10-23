@@ -80,12 +80,12 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUps")]
-        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
 
 
 
-           var result = await _queryRepository.LoadLockUps(ID, MajorCode, MinorCore, languageID);
+           var result = await _queryRepository.LoadLockUps(ID, MajorCode, MinorCode, languageID);
             return result;
         }
 
