@@ -92,7 +92,44 @@ namespace Engine.SPName
         public const string SP_LOAD_BANCK_BRANCH = "DBPK_ORG.LOAD_ST_BANCK_BRANCHES";
 
 
+        /// <summary>
+        /// Company SP NAME
+        /// </summary>
+        ///
 
+        public const string SP_INSERT_COMPANY = "DBPK_ORG.INS_ST_COMPANIES";
+
+        public const string SP_UPADTE_COMPANY = "DBPK_ORG.UPD_ST_COMPANIES";
+
+        public const string SP_DELETE_COMPANY = "DBPK_ORG.DEL_ST_COMPANIES";
+
+        public const string SP_LOAD_COMPANY = "DBPK_ORG.LOAD_ST_COMPANIES";
+
+
+        /// <summary>
+        /// Company BRANCH SP NAME
+        /// </summary>
+        ///
+
+        public const string SP_INSERT_COMPANY_BRANCH = "DBPK_ORG.INS_ST_BRANCHES";
+
+        public const string SP_UPADTE_COMPANY_BRANCH = "DBPK_ORG.UPD_ST_BRANCHES";
+
+        public const string SP_DELETE_COMPANY_BRANCH = "DBPK_ORG.DEL_ST_BRANCHES";
+
+        public const string SP_LOAD_COMPANY_BRANCH = "DBPK_ORG.LOAD_ST_BRANCHES";
+        /// <summary>
+        /// Company SP NAME
+        /// </summary>
+        ///
+
+        public const string SP_INSERT_COMPANY_DEPARTMENT = "DBPK_ORG.INS_ST_DEPARTMENTS";
+
+        public const string SP_UPADTE_COMPANY_DEPARTMENT = "DBPK_ORG.UPD_ST_DEPARTMENTS";
+
+        public const string SP_DELETE_COMPANY_DEPARTMENT = "DBPK_ORG.DEL_ST_DEPARTMENTS";
+
+        public const string SP_LOAD_COMPANY_DEPARTMENT = "DBPK_ORG.LOAD_ST_DEPARTMENTS";
 
 
     }

@@ -28,7 +28,7 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadCountries")]
-        public async Task<IList> LoadCountries(Int64? countryId, Int64? langId)
+        public async Task<List<Country>> LoadCountries(Int64? countryId, Int64? langId)
         {
 
 
@@ -42,19 +42,20 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadCities")]
-        public async Task<IList> LoadCities(long? cityId, long? countryId, long? langId)
+        public async Task<List<City>> LoadCities(long? cityId, long? countryId, long? langId)
         {
 
             var result = await _queryRepository.LoadCities(cityId, countryId, langId);
   
             return result;
         }
-
+     
+    
 
 
         [HttpGet]
         [Route("LoadAreas")]
-        public async Task<IList> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId)
+        public async Task<List<Area>> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId)
         {
 
            var result = await _queryRepository.LoadAreas(areaId , cityId,countryId,langId);
@@ -66,7 +67,7 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadCurrencies")]
-        public async Task<IList> LoadCurrencies(string CurrencyCode, Int64? langId=1)
+        public async Task<List<Currency>> LoadCurrencies(string CurrencyCode, Int64? langId=1)
         {
 
             var result = await _queryRepository.LoadCurrencies(CurrencyCode, langId);
@@ -79,7 +80,7 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUps")]
-        public async Task<IList> LoadLockUps(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1)
         {
 
 
@@ -90,7 +91,7 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUpStatus")]
-        public async Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID )
+        public async Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID )
         {
 
 
@@ -101,11 +102,11 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUpsMinorCode")]
-        public List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID)
+        public async Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID)
         {
 
 
-            List<LockUp> result =  _queryRepository.LoadLockUpsMinorCode(ID, MajorCode, MinorCode, languageID);
+            List<LockUp> result = await  _queryRepository.LoadLockUpsMinorCode(ID, MajorCode, MinorCode, languageID);
 
             return result;
         }
@@ -113,7 +114,7 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadBanks")]
-        public async Task<IList> LoadBanks(long? ID, long? languageID = 1)
+        public async Task<List<Bank>> LoadBanks(long? ID, long? languageID = 1)
         {
 
             var result = await _queryRepository.LoadBanks(ID, languageID);
@@ -122,11 +123,39 @@ namespace Legend.Controllers
         }
         [HttpGet]
         [Route("LoadBankBranches")]
-        public async Task<IList> LoadBankBranches(long? ID, long? BankId,  long? languageID = 1)
+        public async Task<List<BankBranches>> LoadCompanyDepartment(long? ID, long? BankId, long? languageID = 1)
         {
 
-           var result = await _queryRepository.LoadBankBranches(ID, BankId, languageID);
+            var result = await _queryRepository.LoadBankBranches(ID, BankId, languageID);
+
+            return result;
+        }
+        [HttpGet]
+        [Route("LoadCompanies")]
+        public async Task<List<Company>> LoadCompanies(long? ID,   long? languageID = 1)
+        {
+
+           var result = await _queryRepository.LoadCompaniesAsync(ID,  languageID);
      
+            return result;
+        }
+        [HttpGet]
+        [Route("LoadCompanyBranches")]
+        public async Task<List<CompanyBranch>> LoadCompanyBranches(long? ID, long? CompanyId, long? languageID = 1)
+        {
+
+            var result = await _queryRepository.LoadCompanyBranches(ID, CompanyId, languageID);
+
+            return result;
+        }
+      
+        [HttpGet]
+        [Route("LoadCompanyDepartments")]
+        public async Task<List<Department>> LoadCompanyDepartments(long? ID, long? CompanyId, long? languageID = 1)
+        {
+
+            var result = await _queryRepository.LoadCompanyDepartments(ID, CompanyId, languageID);
+
             return result;
         }
     }

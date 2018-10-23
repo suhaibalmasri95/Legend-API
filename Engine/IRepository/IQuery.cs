@@ -13,15 +13,20 @@ namespace Engine.IRepository
     {
 
         Task<IList> GetAllObjects(string SPName, OracleDynamicParameters Params);
-        Task<IList> LoadCountries(Int64? countryId, Int64? langId);
-        Task<IList> LoadCities(long? cityId, long? countryId, long? langId);
-        Task<IList> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId);
-        Task<IList> LoadCurrencies(string CurrencyCode, Int64? langId = 1);
-        Task<IList> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
-        List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
-        Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1);
-        Task<IList> LoadBanks(long? ID, long? languageID = 1);
+        Task<List<DTO>> GetAllObjectsAsEntityAsync<DTO>(string SPName, OracleDynamicParameters Params) where DTO : class;
+        Task<List<Country>> LoadCountries(Int64? countryId, Int64? langId);
+        Task<List<City>> LoadCities(long? cityId, long? countryId, long? langId);
+        Task<List<Area>> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId);
+        Task<List<Currency>> LoadCurrencies(string CurrencyCode, Int64? langId = 1);
+        Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
+        Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
+        Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1);
+        Task<List<Bank>> LoadBanks(long? ID, long? languageID = 1);
 
-        Task<IList> LoadBankBranches(long? ID, long? BankId, long? languageID = 1);
+        Task<List<BankBranches>> LoadBankBranches(long? ID, long? BankId, long? languageID = 1);
+        Task<List<Company>> LoadCompaniesAsync(long? ID, long? languageID = 1);
+        Task<List<CompanyBranch>> LoadCompanyBranches(long? ID, long? companyID, long? languageID = 1);
+        Task<List<Department>> LoadCompanyDepartments(long? ID, long? companyID, long? languageID = 1);
+
     }
 }

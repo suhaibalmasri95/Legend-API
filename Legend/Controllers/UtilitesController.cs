@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Engine.Helpers;
 using Engine.IRepository;
@@ -35,22 +36,22 @@ namespace Legend.Controllers
             fileName += guid.ToString() + ".pdf";
             if (Type.ToLower() == "country")
             {
-                IList list = await _queryRepository.LoadCountries(null, null);
-                List<Country> countries = list as  List<Country>;
+                List<Country> countries = await _queryRepository.LoadCountries(null, null);
+          
 
                 dt = Utilities.ToDataTable(countries);
             }
             else if (Type.ToLower() == "city")
             {
-                IList list = await _queryRepository.LoadCities(null, null,null);
-                List<City> cities = list as List<City>;
+                List<City> cities = await _queryRepository.LoadCities(null, null,null);
+           
                 dt = Utilities.ToDataTable(cities);
             }
             else if (Type.ToLower() == "area")
             {
-                IList list = await _queryRepository.LoadAreas(null, null, null, null);
+                List<Area> areas = await _queryRepository.LoadAreas(null, null, null, null);
 
-                List<Area> areas = list as List<Area>;
+           
 
                 dt = Utilities.ToDataTable(areas);
              
@@ -58,9 +59,8 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "lockup")
             {
-                IList list = await _queryRepository.LoadLockUps(null, null, null, null);
-
-                List<LockUp> LockUps = list as List<LockUp>;
+                List<LockUp> LockUps = await _queryRepository.LoadLockUps(null, null, null, null);
+                
 
                 dt = Utilities.ToDataTable(LockUps);
            
@@ -68,9 +68,9 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "bank")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<Bank> banks = await _queryRepository.LoadBanks(null, null);
 
-                List<Bank> banks = list as List<Bank>;
+                
 
                 dt = Utilities.ToDataTable(banks);
         
@@ -78,9 +78,9 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "bankbranches")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<BankBranches> bankBranches = await _queryRepository.LoadBankBranches(null, null,null);
 
-                List<BankBranches> bankBranches = list as List<BankBranches>;
+            
 
                 dt = Utilities.ToDataTable(bankBranches);
 
@@ -88,9 +88,9 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "currency")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<Currency> currencies = await _queryRepository.LoadCurrencies(null, null);
 
-                List<Currency> currencies = list as List<Currency>;
+                
 
                 dt = Utilities.ToDataTable(currencies);
             
@@ -130,22 +130,22 @@ namespace Legend.Controllers
             fileName += guid.ToString() + ".xlsx";
             if (Type.ToLower() == "country")
             {
-                IList list = await _queryRepository.LoadCountries(null, null);
-                List<Country> countries = list as List<Country>;
+                List<Country> countries = await _queryRepository.LoadCountries(null, null);
+
 
                 dt = Utilities.ToDataTable(countries);
             }
             else if (Type.ToLower() == "city")
             {
-                IList list = await _queryRepository.LoadCities(null, null, null);
-                List<City> cities = list as List<City>;
+                List<City> cities = await _queryRepository.LoadCities(null, null, null);
+
                 dt = Utilities.ToDataTable(cities);
             }
             else if (Type.ToLower() == "area")
             {
-                IList list = await _queryRepository.LoadAreas(null, null, null, null);
+                List<Area> areas = await _queryRepository.LoadAreas(null, null, null, null);
 
-                List<Area> areas = list as List<Area>;
+
 
                 dt = Utilities.ToDataTable(areas);
 
@@ -153,9 +153,8 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "lockup")
             {
-                IList list = await _queryRepository.LoadLockUps(null, null, null, null);
+                List<LockUp> LockUps = await _queryRepository.LoadLockUps(null, null, null, null);
 
-                List<LockUp> LockUps = list as List<LockUp>;
 
                 dt = Utilities.ToDataTable(LockUps);
 
@@ -163,9 +162,9 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "bank")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<Bank> banks = await _queryRepository.LoadBanks(null, null);
 
-                List<Bank> banks = list as List<Bank>;
+
 
                 dt = Utilities.ToDataTable(banks);
 
@@ -173,9 +172,9 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "bankbranches")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<BankBranches> bankBranches = await _queryRepository.LoadBankBranches(null, null, null);
 
-                List<BankBranches> bankBranches = list as List<BankBranches>;
+
 
                 dt = Utilities.ToDataTable(bankBranches);
 
@@ -183,9 +182,9 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "currency")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<Currency> currencies = await _queryRepository.LoadCurrencies(null, null);
 
-                List<Currency> currencies = list as List<Currency>;
+
 
                 dt = Utilities.ToDataTable(currencies);
 
@@ -228,54 +227,53 @@ namespace Legend.Controllers
             Random rand = new Random();
             int guid = rand.Next();
             fileName += guid.ToString() + ".csv";
-             if (Type.ToLower() == "country")
+            if (Type.ToLower() == "country")
             {
-                IList list = await _queryRepository.LoadCountries(null, null);
-                List<Country> countries = list as  List<Country>;
+                List<Country> countries = await _queryRepository.LoadCountries(null, null);
+
 
                 dt = Utilities.ToDataTable(countries);
             }
             else if (Type.ToLower() == "city")
             {
-                IList list = await _queryRepository.LoadCities(null, null,null);
-                List<City> cities = list as List<City>;
+                List<City> cities = await _queryRepository.LoadCities(null, null, null);
+
                 dt = Utilities.ToDataTable(cities);
             }
             else if (Type.ToLower() == "area")
             {
-                IList list = await _queryRepository.LoadAreas(null, null, null, null);
+                List<Area> areas = await _queryRepository.LoadAreas(null, null, null, null);
 
-                List<Area> areas = list as List<Area>;
+
 
                 dt = Utilities.ToDataTable(areas);
-             
+
 
             }
             else if (Type.ToLower() == "lockup")
             {
-                IList list = await _queryRepository.LoadLockUps(null, null, null, null);
+                List<LockUp> LockUps = await _queryRepository.LoadLockUps(null, null, null, null);
 
-                List<LockUp> LockUps = list as List<LockUp>;
 
                 dt = Utilities.ToDataTable(LockUps);
-           
+
 
             }
             else if (Type.ToLower() == "bank")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<Bank> banks = await _queryRepository.LoadBanks(null, null);
 
-                List<Bank> banks = list as List<Bank>;
+
 
                 dt = Utilities.ToDataTable(banks);
-        
+
 
             }
             else if (Type.ToLower() == "bankbranches")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<BankBranches> bankBranches = await _queryRepository.LoadBankBranches(null, null, null);
 
-                List<BankBranches> bankBranches = list as List<BankBranches>;
+
 
                 dt = Utilities.ToDataTable(bankBranches);
 
@@ -283,16 +281,16 @@ namespace Legend.Controllers
             }
             else if (Type.ToLower() == "currency")
             {
-                IList list = await _queryRepository.LoadBanks(null, null);
+                List<Currency> currencies = await _queryRepository.LoadCurrencies(null, null);
 
-                List<Currency> currencies = list as List<Currency>;
+
 
                 dt = Utilities.ToDataTable(currencies);
-            
+
 
             }
 
-            /*  StringBuilder sb = new StringBuilder();
+             StringBuilder sb = new StringBuilder();
 
               string[] columnNames = dt.Columns.Cast<DataColumn>().
                                                 Select(column => column.ColumnName).
@@ -308,7 +306,7 @@ namespace Legend.Controllers
 
                   sb.AppendLine(string.Join(",", fields));
 
-              }*/
+              }
             Byte[] myData = Utilities.csvBytesWriter(ref dt);
 
 

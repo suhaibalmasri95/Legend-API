@@ -286,5 +286,116 @@ namespace Legend.Controllers
 
 
         }
+
+     
+
+        [HttpDelete]
+        [Route("DeleteCompany")]
+        public async Task<int> DeleteCompany(int CountryID)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)CountryID ?? DBNull.Value);
+
+            int result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_COMPANY, dyParam);
+
+            if (result == -1)
+                return Convert.ToInt32(HttpStatusCode.OK);
+            else
+                return Convert.ToInt32(HttpStatusCode.NotModified);
+        }
+
+        [HttpDelete]
+        [Route("DeleteCompanies")]
+        public async Task<int> DeleteCompanies([FromBody]int[] Coutnries)
+        {
+            int result = 0;
+            int CoutnriesArrayLenght = Coutnries.Length;
+            for (int i = 0; i < CoutnriesArrayLenght; i++)
+            {
+                var dyParam = new OracleDynamicParameters();
+                dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)Coutnries[i] ?? DBNull.Value);
+
+                result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_COMPANY, dyParam);
+                if (result != -1)
+                    return Convert.ToInt32(HttpStatusCode.NotModified);
+            }
+            return Convert.ToInt32(HttpStatusCode.OK);
+
+
+        }
+
+        [HttpDelete]
+        [Route("DeleteCompanyBranch")]
+        public async Task<int> DeleteCompanyBranch(int BranchID)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)BranchID ?? DBNull.Value);
+
+            int result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_COMPANY_BRANCH, dyParam);
+
+            if (result == -1)
+                return Convert.ToInt32(HttpStatusCode.OK);
+            else
+                return Convert.ToInt32(HttpStatusCode.NotModified);
+        }
+
+        [HttpDelete]
+        [Route("DeleteCompanyBranches")]
+        public async Task<int> DeleteCompanyBranches([FromBody]int[] branches)
+        {
+            int result = 0;
+            int branchesArrayLenght = branches.Length;
+            for (int i = 0; i < branchesArrayLenght; i++)
+            {
+                var dyParam = new OracleDynamicParameters();
+                dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)branches[i] ?? DBNull.Value);
+
+                result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_COMPANY_BRANCH, dyParam);
+                if (result != -1)
+                    return Convert.ToInt32(HttpStatusCode.NotModified);
+            }
+            return Convert.ToInt32(HttpStatusCode.OK);
+
+
+        }
+
+
+        [HttpDelete]
+        [Route("DeleteCompanyDepartment")]
+        public async Task<int> DeleteCompanyDepartment(int DepartmentID)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)DepartmentID ?? DBNull.Value);
+
+            int result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_COMPANY_DEPARTMENT, dyParam);
+
+            if (result == -1)
+                return Convert.ToInt32(HttpStatusCode.OK);
+            else
+                return Convert.ToInt32(HttpStatusCode.NotModified);
+        }
+
+        [HttpDelete]
+        [Route("DeleteLockUps")]
+        public async Task<int> DeleteCompanyDepartments([FromBody]int[] Departments)
+        {
+            int result = 0;
+            int DepartmentsArrayLenght = Departments.Length;
+            for (int i = 0; i < DepartmentsArrayLenght; i++)
+            {
+                var dyParam = new OracleDynamicParameters();
+                dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)Departments[i] ?? DBNull.Value);
+
+                result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_COMPANY_DEPARTMENT, dyParam);
+                if (result != -1)
+                    return Convert.ToInt32(HttpStatusCode.NotModified);
+            }
+            return Convert.ToInt32(HttpStatusCode.OK);
+
+
+        }
     }
 }

@@ -48,9 +48,10 @@ namespace Engine.Repository
             return result;
         }
 
-        public  List<LockUp> GetAllLockUp(string SPName, OracleDynamicParameters Params)
+      
+        public async Task<List<DTO>> GetAllObjectsAsEntityAsync<DTO>(string SPName, OracleDynamicParameters Params) where DTO : class
         {
-            List<LockUp> result = new List<LockUp>();
+            List<DTO> result = null;
             try
             {
                 var connection = new DbConnection().GetConnection();
@@ -61,7 +62,7 @@ namespace Engine.Repository
 
                 if (connection.State == ConnectionState.Open)
                 {
-                    result = SqlMapper.Query<LockUp>(connection, SPName, param: Params, commandType: CommandType.StoredProcedure).ToList();
+                    result = await SqlMapper.QueryAsync<DTO>(connection, SPName, param: Params, commandType: CommandType.StoredProcedure) as List<DTO>;
                 }
             }
             catch (Exception ex)
@@ -71,7 +72,7 @@ namespace Engine.Repository
 
             return result;
         }
-        public async Task<IList> LoadCountries(Int64? countryId, Int64? langId)
+        public async Task<List<Country>> LoadCountries(Int64? countryId, Int64? langId)
         {
             var dyParam = new OracleDynamicParameters();
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)countryId ?? DBNull.Value);
@@ -79,14 +80,14 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_COUNTRY, dyParam);
+            var result = await GetAllObjectsAsEntityAsync<Country>(SPName.SPName.SP_LOAD_COUNTRY, dyParam);
 
             return result;
         }
 
 
       
-        public async Task<IList> LoadCities(long? cityId, long? countryId, long? langId)
+        public async Task<List<City>> LoadCities(long? cityId, long? countryId, long? langId)
         {
 
 
@@ -97,15 +98,16 @@ namespace Engine.Repository
             dyParam.Add("IN_LANG", OracleDbType.Int64, ParameterDirection.Input, (object)langId ?? DBNull.Value);
             dyParam.Add("IN_REF_SELECT", OracleDbType.RefCursor, ParameterDirection.Output);
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_CITY, dyParam);
+            var result = await GetAllObjectsAsEntityAsync<City>(SPName.SPName.SP_LOAD_CITY, dyParam);
 
             return result;
         }
 
+       
 
 
-      
-        public async Task<IList> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId)
+
+        public async Task<List<Area>> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId)
         {
             var dyParam = new OracleDynamicParameters();
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)areaId ?? DBNull.Value);
@@ -115,14 +117,14 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_AREA, dyParam);
+            var result = await GetAllObjectsAsEntityAsync<Area>(SPName.SPName.SP_LOAD_AREA, dyParam);
 
             return result;
         }
 
 
 
-        public async Task<IList> LoadCurrencies(string CurrencyCode, Int64? langId = 1)
+        public async Task<List<Currency>> LoadCurrencies(string CurrencyCode, Int64? langId = 1)
         {
             var dyParam = new OracleDynamicParameters();
             dyParam.Add(Params.PARAMETER_CURRENCY_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)CurrencyCode ?? DBNull.Value, 30);
@@ -130,14 +132,14 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_CURRENCY, dyParam);
+            var result = await GetAllObjectsAsEntityAsync<Currency>(SPName.SPName.SP_LOAD_CURRENCY, dyParam);
 
             return result;
         }
 
 
        
-        public async Task<IList> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
@@ -148,12 +150,12 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
+            var result = await GetAllObjectsAsEntityAsync<LockUp>(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
             return result;
         }
 
        
-        public async Task<IList> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
@@ -164,13 +166,13 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-           var result = await GetAllObjects(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
+           var result = await GetAllObjectsAsEntityAsync<LockUp>(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
             result.RemoveAt(0);
             return result;
         }
 
 
-        public List<LockUp> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
         {
             List<LockUp> minorCodes = new List<LockUp>();
             List<LockUp> minorCodesToReturn = new List<LockUp>();
@@ -184,7 +186,7 @@ namespace Engine.Repository
 
 
 
-            minorCodes = GetAllLockUp(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
+            minorCodes =await GetAllObjectsAsEntityAsync<LockUp>(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
 
             foreach (var item in minorCodes)
             {
@@ -201,7 +203,7 @@ namespace Engine.Repository
 
 
 
-        public async Task<IList> LoadBanks(long? ID, long? languageID = 1)
+        public async Task<List<Bank>> LoadBanks(long? ID, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
@@ -211,12 +213,12 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_BANCK, dyParam);
+            var result = await GetAllObjectsAsEntityAsync<Bank>(SPName.SPName.SP_LOAD_BANCK, dyParam);
 
             return result ;
         }
 
-        public async Task<IList> LoadBankBranches(long? ID, long? BankId, long? languageID = 1)
+        public async Task<List<BankBranches>> LoadBankBranches(long? ID, long? BankId, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
@@ -226,11 +228,54 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjects(SPName.SPName.SP_LOAD_BANCK_BRANCH, dyParam); ;
+            var result = await GetAllObjectsAsEntityAsync<BankBranches>(SPName.SPName.SP_LOAD_BANCK_BRANCH, dyParam); ;
 
             return result;
         }
 
+        public async Task<List<Company>> LoadCompaniesAsync(long? ID, long? languageID = 1)
+        {
+            var dyParam = new OracleDynamicParameters();
 
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
+       
+            dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
+
+
+            var result = await GetAllObjectsAsEntityAsync<Company>(SPName.SPName.SP_LOAD_COMPANY, dyParam); ;
+
+            return result;
+        }
+
+        public async Task<List<CompanyBranch>> LoadCompanyBranches(long? ID, long? companyID, long? languageID = 1)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_COMPANY_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)companyID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
+
+
+            var result = await GetAllObjectsAsEntityAsync<CompanyBranch>(SPName.SPName.SP_LOAD_BANCK_BRANCH, dyParam); ;
+
+            return result;
+        }
+
+        public async Task<List<Department>> LoadCompanyDepartments(long? ID, long? companyID, long? languageID = 1)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_COMPANY_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)companyID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
+
+
+            var result = await GetAllObjectsAsEntityAsync<Department>(SPName.SPName.SP_LOAD_BANCK_BRANCH, dyParam); ;
+
+            return result;
+        }
     }
 }

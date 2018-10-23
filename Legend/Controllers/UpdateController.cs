@@ -207,5 +207,92 @@ namespace Legend.Controllers
             else
                 return Convert.ToInt32(HttpStatusCode.NotModified);
          }
+
+        [HttpPost]
+        [Route("UpdateCompany")]
+        public async Task<int> UpdateCompany([FromBody]Company company)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)company.ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.NAME ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.NAME2 ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_PHONE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.PHONE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_COUNTRY_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.COUNTRY_CODE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_MOBILE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.MOBILE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_FAX, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.FAX ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.Email ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_WEBSITE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.WEBSITE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_ADDRESS, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.ADDRESS ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_ADDRESS2, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.ADDRESS2 ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_CONTACT_PERSON, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.CONTACT_PERSON ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.CODE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_COUNTRY_CURRENCY_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.ST_CUR_CODE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_COUNTRY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)company.ST_CNT_ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_LOGO, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.LOGO ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_PASS_MLENGHT, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_MLENGHT ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_MUPPER, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_MUPPER ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_MLOWER, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_MLOWER ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_MDIGITS, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_MDIGITS ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_MSPECIAL, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_MSPECIAL ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_EXPIRY_PERIOD, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_EXPIRY_PERIOD ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_LOGATTEMPTS, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_LOGATTEMPTS ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_PASS_REPEAT, OracleDbType.Int32, ParameterDirection.Input, (object)company.PASS_REPEAT ?? DBNull.Value);
+            int result = await _UpdateRepository.UpdateObjectAsync(SPName.SP_UPADTE_COMPANY, dyParam);
+
+            if (result == -1)
+                return Convert.ToInt32(HttpStatusCode.OK);
+            else
+                return Convert.ToInt32(HttpStatusCode.NotModified);
+        }
+
+        [HttpPost]
+        [Route("UpdateCompanyBranch")]
+        public async Task<int> UpdateCompanyBranch([FromBody]CompanyBranch companyBranch)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)companyBranch.ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.NAME ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.NAME2 ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.CODE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_PHONE, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.PHONE ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_FAX, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.FAX ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_ADDRESS, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.ADDRESS ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_ADDRESS2, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.ADDRESS2 ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_COMPANY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)companyBranch.ST_COM_ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_CITY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)companyBranch.ST_CTY_ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_COUNTRY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)companyBranch.ST_CNT_ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_COUNTRY_CURRENCY_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.ST_CUR_CODE ?? DBNull.Value, 30);
+
+            int result = await _UpdateRepository.UpdateObjectAsync(SPName.SP_UPADTE_COMPANY_BRANCH, dyParam);
+
+            if (result == -1)
+                return Convert.ToInt32(HttpStatusCode.OK);
+            else
+                return Convert.ToInt32(HttpStatusCode.NotModified);
+        }
+
+        [HttpPost]
+        [Route("UpdateCompanyDepartment")]
+        public async Task<int> UpdateCompanyDepartment([FromBody]Department department)
+        {
+            var dyParam = new OracleDynamicParameters();
+
+            dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)department.ID ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.NAME ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.NAME2 ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_ADDRESS, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.ADDRESS ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.Email ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_COMPANY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)department.ST_COM_ID ?? DBNull.Value, 30);
+
+
+            int result = await _UpdateRepository.UpdateObjectAsync(SPName.SP_UPADTE_COMPANY_DEPARTMENT, dyParam);
+
+            if (result == -1)
+                return Convert.ToInt32(HttpStatusCode.OK);
+            else
+                return Convert.ToInt32(HttpStatusCode.NotModified);
+        }
     }
 }

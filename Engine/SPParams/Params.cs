@@ -36,9 +36,30 @@ namespace Engine.SPParams
         public const string PARAMETER_MODIFICATION_DATE = "IN_MODIFICATION_DATE";
         public const string PARAMETER_ST_LOCKUP_ID = "IN_ST_LOCKUP_ID ";
         public const string PARAMETER_LOCKUP_TYPE = "IN_LOCKUP_TYPE";
-        public const string PARAMETER_REF_NO = "IN_REF_NO ";
+        public const string PARAMETER_REF_NO = "IN_REF_NO";
 
-  
+        public const string PARAMETER_COUNTRY_CODE = "IN_COUNTRY_CODE";
+        public const string PARAMETER_MOBILE = "IN_MOBILE ";
+        public const string PARAMETER_FAX = "IN_FAX ";
+        public const string PARAMETER_EMAIL = "IN_EMAIL";
+        public const string PARAMETER_WEBSITE = "IN_WEBSITE";
+        public const string PARAMETER_ADDRESS = "IN_ADDRESS";
+        public const string PARAMETER_ADDRESS2 = "IN_ADDRESS2";
+        public const string PARAMETER_CONTACT_PERSON = "CONTACT_PERSON";
+        public const string PARAMETER_LOGO = "IN_LOGO";
+        public const string PARAMETER_PASS_MLENGHT = "IN_PASS_MLENGHT";
+        public const string PARAMETER_PASS_MUPPER = "IN_PASS_MUPPER";
+        public const string PARAMETER_PASS_MLOWER = "IN_PASS_MLOWER";
+        public const string PARAMETER_PASS_MDIGITS = "IN_PASS_MDIGITS";
+        public const string PARAMETER_PASS_MSPECIAL = "IN_PASS_MSPECIAL";
+        public const string PARAMETER_PASS_EXPIRY_PERIOD = "IN_PASS_EXPIRY_PERIOD";
+        public const string PARAMETER_PASS_LOGATTEMPTS = "IN_PASS_LOGATTEMPTS";
+        public const string PARAMETER_PASS_REPEAT = "IN_PASS_REPEAT";
+        public const string PARAMETER_COMPANY_ID = "IN_COM_ID";
+
+        public const string PARAMETER_CODE = "IN_CODE";
+
+
 
     }
 }
