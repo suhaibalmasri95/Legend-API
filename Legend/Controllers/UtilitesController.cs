@@ -11,6 +11,7 @@ using Engine.IRepository;
 using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Legend.Controllers
 {
@@ -25,7 +26,7 @@ namespace Legend.Controllers
         }
         [HttpGet]
         [Route("ExportToPdf")]
-        public async Task<IActionResult> ExportToPdf(string fileName, string Type)
+        public async Task<IActionResult> ExportToPdfAsync(string fileName, string Type)
         {
            
 
@@ -66,6 +67,24 @@ namespace Legend.Controllers
            
 
             }
+            else if (Type.ToLower() == "majorcode")
+            {
+                List<LockUp> LockUps = await _queryRepository.LoadLockUps(null, null, 0, null);
+
+
+                dt = Utilities.ToDataTable(LockUps);
+
+
+            }
+            else if (Type.ToLower() == "minorcode")
+            {
+                List<LockUp> LockUps = await _queryRepository.LoadLockUpsMinorCode(null, null, null, null);
+
+
+                dt = Utilities.ToDataTable(LockUps);
+
+
+            }
             else if (Type.ToLower() == "bank")
             {
                 List<Bank> banks = await _queryRepository.LoadBanks(null, null);
@@ -96,6 +115,11 @@ namespace Legend.Controllers
             
 
             }
+            else
+            {
+
+                return Ok(new { StatusCode = "Code Not Available" });
+            }
             var path = Path.Combine(
                      Directory.GetCurrentDirectory(), "wwwroot/Documents",
                      fileName);
@@ -114,6 +138,20 @@ namespace Legend.Controllers
         }
 
 
+
+        [HttpPost]
+        [Route("ExportData")]
+        public IActionResult ExportData([FromBody] IEnumerable<object> Entity)
+        {
+
+
+            Type t = Entity.GetType();
+
+
+
+
+            return Ok( Entity);
+        }
 
 
         [HttpGet]
@@ -160,6 +198,24 @@ namespace Legend.Controllers
 
 
             }
+            else if (Type.ToLower() == "majorcode")
+            {
+                List<LockUp> LockUps = await _queryRepository.LoadLockUps(null, null, 0, null);
+
+
+                dt = Utilities.ToDataTable(LockUps);
+
+
+            }
+            else if (Type.ToLower() == "minorcode")
+            {
+                List<LockUp> LockUps = await _queryRepository.LoadLockUpsMinorCode(null, null, null, null);
+
+
+                dt = Utilities.ToDataTable(LockUps);
+
+
+            }
             else if (Type.ToLower() == "bank")
             {
                 List<Bank> banks = await _queryRepository.LoadBanks(null, null);
@@ -190,6 +246,11 @@ namespace Legend.Controllers
 
 
             }
+            else
+            {
+
+                return Ok(new { StatusCode = "Code Not Available" });
+            }
             ClosedXML.Excel.XLWorkbook wbook = new ClosedXML.Excel.XLWorkbook();
             wbook.Worksheets.Add(dt, file);
 
@@ -206,15 +267,16 @@ namespace Legend.Controllers
 
 
             wbook.SaveAs(memoryStream);
-            memoryStream.WriteTo(Response.Body);
+           
             memoryStream.Position = 0;
             memoryStream.Close();
 
 
-            return File(memoryStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
 
         }
-
+   
+    
 
         [HttpGet]
         [Route("ExportToCSV")]
@@ -259,6 +321,24 @@ namespace Legend.Controllers
 
 
             }
+            else if (Type.ToLower() == "majorcode")
+            {
+                List<LockUp> LockUps = await _queryRepository.LoadLockUps(null, null, 0, null);
+
+
+                dt = Utilities.ToDataTable(LockUps);
+
+
+            }
+            else if (Type.ToLower() == "minorcode")
+            {
+                List<LockUp> LockUps = await _queryRepository.LoadLockUpsMinorCode(null, null, null, null);
+
+
+                dt = Utilities.ToDataTable(LockUps);
+
+
+            }
             else if (Type.ToLower() == "bank")
             {
                 List<Bank> banks = await _queryRepository.LoadBanks(null, null);
@@ -289,8 +369,12 @@ namespace Legend.Controllers
 
 
             }
+            else
+            {
 
-             StringBuilder sb = new StringBuilder();
+                return Ok(new { StatusCode = "Code Not Available" });
+            }
+            StringBuilder sb = new StringBuilder();
 
               string[] columnNames = dt.Columns.Cast<DataColumn>().
                                                 Select(column => column.ColumnName).

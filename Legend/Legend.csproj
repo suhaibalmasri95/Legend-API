@@ -9,8 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.93.1" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.8.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ClosedXML">
-      <HintPath>..\References\ClosedXML.dll</HintPath>
-    </Reference>
     <Reference Include="Oracle.ManagedDataAccess">
       <HintPath>D:\Project\Demo\Demo\bin\Debug\netcoreapp2.1\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\..\..\..\References\System.Drawing.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
 
