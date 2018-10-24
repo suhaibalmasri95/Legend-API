@@ -80,33 +80,33 @@ namespace Legend.Controllers
 
         [HttpGet]
         [Route("LoadLockUps")]
-        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1)
         {
 
 
 
-           var result = await _queryRepository.LoadLockUps(ID, MajorCode, MinorCode, languageID);
+           var result = await _queryRepository.LoadLockUps(ID, MajorCode, MinorCode, LockupParentID, languageID);
             return result;
         }
 
         [HttpGet]
         [Route("LoadLockUpStatus")]
-        public async Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID )
+        public async Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID )
         {
 
 
-          var result = await _queryRepository.LoadLockUpStatus(ID, MajorCode, MinorCode, languageID);
+          var result = await _queryRepository.LoadLockUpStatus(ID, MajorCode, MinorCode, LockupParentID, languageID);
       
             return result;
         }
 
         [HttpGet]
         [Route("LoadLockUpsMinorCode")]
-        public async Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID)
+        public async Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID)
         {
 
 
-            List<LockUp> result = await  _queryRepository.LoadLockUpsMinorCode(ID, MajorCode, MinorCode, languageID);
+            List<LockUp> result = await  _queryRepository.LoadLockUpsMinorCode(ID, MajorCode, MinorCode, LockupParentID, languageID);
 
             return result;
         }

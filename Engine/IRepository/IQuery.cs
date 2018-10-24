@@ -18,9 +18,9 @@ namespace Engine.IRepository
         Task<List<City>> LoadCities(long? cityId, long? countryId, long? langId);
         Task<List<Area>> LoadAreas(Int64? areaId, Int64? cityId, Int64? countryId, Int64? langId);
         Task<List<Currency>> LoadCurrencies(string CurrencyCode, Int64? langId = 1);
-        Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
-        Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1);
-        Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCore, long? languageID = 1);
+        Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1);
+        Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1);
+        Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1);
         Task<List<Bank>> LoadBanks(long? ID, long? languageID = 1);
 
         Task<List<BankBranches>> LoadBankBranches(long? ID, long? BankId, long? languageID = 1);

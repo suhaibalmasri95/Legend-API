@@ -139,14 +139,17 @@ namespace Engine.Repository
 
 
        
-        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUps(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MajorCode ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCode ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_LOCKUP_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)LockupParentID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
+            
+            
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
@@ -155,24 +158,25 @@ namespace Engine.Repository
         }
 
        
-        public async Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUpStatus(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1)
         {
             var dyParam = new OracleDynamicParameters();
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MajorCode ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCode ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_LOCKUP_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)LockupParentID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
            var result = await GetAllObjectsAsEntityAsync<LockUp>(SPName.SPName.SP_LOAD_LOCKUPS, dyParam);
-            result.RemoveAt(0);
+           // result.RemoveAt(0);
             return result;
         }
 
 
-        public async Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? languageID = 1)
+        public async Task<List<LockUp>> LoadLockUpsMinorCode(long? ID, long? MajorCode, long? MinorCode, long? LockupParentID, long? languageID = 1)
         {
             List<LockUp> minorCodes = new List<LockUp>();
             List<LockUp> minorCodesToReturn = new List<LockUp>();
@@ -181,6 +185,7 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)ID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_MAJOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MajorCode ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_ST_MINOR_CODE, OracleDbType.Decimal, ParameterDirection.Input, (object)MinorCode ?? DBNull.Value);
+            dyParam.Add(Params.PARAMETER_ST_LOCKUP_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)LockupParentID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_LANG_ID, OracleDbType.Decimal, ParameterDirection.Input, (object)languageID ?? DBNull.Value);
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
