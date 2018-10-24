@@ -251,7 +251,7 @@ namespace Legend.Controllers
 
         }
 
-        [HttpDelete]
+             [HttpDelete]
              [Route("DeleteLockUp")]
              public async Task<int> DeleteLockUp( int lockupID)
              {
@@ -266,6 +266,7 @@ namespace Legend.Controllers
                 else
                     return Convert.ToInt32(HttpStatusCode.NotModified);
              }
+
 
         [HttpDelete]
         [Route("DeleteLockUps")]
@@ -286,6 +287,8 @@ namespace Legend.Controllers
 
 
         }
+
+   
 
      
 
@@ -379,7 +382,7 @@ namespace Legend.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteLockUps")]
+        [Route("DeleteCompanyDepartments")]
         public async Task<int> DeleteCompanyDepartments([FromBody]int[] Departments)
         {
             int result = 0;
