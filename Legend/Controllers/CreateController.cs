@@ -257,7 +257,7 @@ namespace Legend.Controllers
             dyParam.Add(Params.PARAMETER_COUNTRY_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.COUNTRY_CODE ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_MOBILE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.MOBILE ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_FAX, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.FAX ?? DBNull.Value,30);
-            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.Email ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.EMAIL ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_WEBSITE, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.WEBSITE ?? DBNull.Value,30);
             dyParam.Add(Params.PARAMETER_ADDRESS, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.ADDRESS ?? DBNull.Value,30);
             dyParam.Add(Params.PARAMETER_ADDRESS2, OracleDbType.Varchar2, ParameterDirection.Input, (object)company.ADDRESS2 ?? DBNull.Value,30);
@@ -289,11 +289,12 @@ namespace Legend.Controllers
             var dyParam = new OracleDynamicParameters();
 
             dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Output);
-            dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.NAME ?? DBNull.Value, 500);
-            dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.NAME2 ?? DBNull.Value, 500);
+            dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.NAME ?? DBNull.Value, 1000);
+            dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.NAME2 ?? DBNull.Value, 1000);
             dyParam.Add(Params.PARAMETER_CODE, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.CODE ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_PHONE, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.PHONE ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_FAX, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.FAX ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.EMAIL ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_ADDRESS, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.ADDRESS ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_ADDRESS2, OracleDbType.Varchar2, ParameterDirection.Input, (object)companyBranch.ADDRESS2 ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_COMPANY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)companyBranch.ST_COM_ID ?? DBNull.Value);
@@ -319,7 +320,7 @@ namespace Legend.Controllers
             dyParam.Add(Params.PARAMETER_NAME, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.NAME ?? DBNull.Value, 500);
             dyParam.Add(Params.PARAMETER_NAME2, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.NAME2 ?? DBNull.Value, 500);
             dyParam.Add(Params.PARAMETER_ADDRESS, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.ADDRESS ?? DBNull.Value, 30);
-            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.Email ?? DBNull.Value, 30);
+            dyParam.Add(Params.PARAMETER_EMAIL, OracleDbType.Varchar2, ParameterDirection.Input, (object)department.EMAIL ?? DBNull.Value, 30);
             dyParam.Add(Params.PARAMETER_COMPANY_ID, OracleDbType.Int64, ParameterDirection.Input, (object)department.ST_COM_ID ?? DBNull.Value, 30);
    
 

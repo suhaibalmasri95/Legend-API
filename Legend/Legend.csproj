@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Reference Include="Oracle.ManagedDataAccess">
-      <HintPath>D:\Project\Demo\Demo\bin\Debug\netcoreapp2.1\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\References\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -14,6 +14,6 @@ namespace Entities.Entities
         [JsonProperty(PropertyName = "ADDRESS")]
         public string ADDRESS { get; set; }
         [JsonProperty(PropertyName = "Email")]
-        public string Email { get; set; }
+        public string EMAIL { get; set; }
     }
 }

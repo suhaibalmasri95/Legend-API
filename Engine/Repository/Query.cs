@@ -248,7 +248,7 @@ namespace Engine.Repository
             dyParam.Add(Params.PARAMETER_REF_SELECT, OracleDbType.RefCursor, ParameterDirection.Output);
 
 
-            var result = await GetAllObjectsAsEntityAsync<Company>(SPName.SPName.SP_LOAD_COMPANY, dyParam); ;
+            var result = await GetAllObjectsAsEntityAsync<Company>(SPName.SPName.SP_LOAD_COMPANY, dyParam); 
 
             return result;
         }

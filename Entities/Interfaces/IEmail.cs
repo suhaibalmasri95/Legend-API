@@ -7,6 +7,6 @@ namespace Entities.Interfaces
     public interface IEmail
     {
        
-         string Email { get; set; }
+         string EMAIL { get; set; }
     }
 }
