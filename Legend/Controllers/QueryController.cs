@@ -123,7 +123,7 @@ namespace Legend.Controllers
         }
         [HttpGet]
         [Route("LoadBankBranches")]
-        public async Task<List<BankBranches>> LoadCompanyDepartment(long? ID, long? BankId, long? languageID = 1)
+        public async Task<List<BankBranches>> LoadBankBranches(long? ID, long? BankId, long? languageID = 1)
         {
 
             var result = await _queryRepository.LoadBankBranches(ID, BankId, languageID);
