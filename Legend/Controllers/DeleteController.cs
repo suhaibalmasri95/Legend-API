@@ -279,7 +279,7 @@ namespace Legend.Controllers
                 var dyParam = new OracleDynamicParameters();
                 dyParam.Add(Params.PARAMETER_ID, OracleDbType.Int64, ParameterDirection.Input, (object)lockups[i] ?? DBNull.Value);
 
-                result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_CURRENCY, dyParam);
+                result = await _DeleteRepository.DeleteObjectAsync(SPName.SP_DELETE_LOCKUPS, dyParam);
                 if (result != -1)
                     return Convert.ToInt32(HttpStatusCode.NotModified);
             }
